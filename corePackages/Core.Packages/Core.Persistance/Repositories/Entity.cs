@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Persistance.Repositories;
 
-public class Entity<TId> where TId : unmanaged
+public class Entity<TId> : IEntityTimestamps where TId : unmanaged
 {
     public TId Id { get; set; }
     public DateTime CreatedDate { get; set; }
