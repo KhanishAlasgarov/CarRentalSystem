@@ -11,12 +11,12 @@ namespace Application.Features.Brands.Commands.Create
     {
         public string? Name { get; set; }
 
-        public class BrandCreateCommandHandler : IRequestHandler<BrandCreateCommand, CreatedBrandResponse>
-        {
-            public async Task<CreatedBrandResponse> Handle(BrandCreateCommand request, CancellationToken cancellationToken)
-            {
-                 
-            }
-        }
+        //public class BrandCreateCommandHandler : IRequestHandler<BrandCreateCommand, CreatedBrandResponse>
+        //{
+        //    public async Task<CreatedBrandResponse> Handle(BrandCreateCommand request, CancellationToken cancellationToken)
+        //    {
+
+        //    }
+        //}
     }
 }

@@ -1,17 +1,20 @@
 using Application;
+using Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddApplicationServices();
+builder.Services
+    .AddApplicationServices()
+    .AddPersistanceService(builder.Configuration);
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
+ 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
