@@ -7,16 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Brands\Commands\Delete\" />
-    <Folder Include="Features\Brands\Commands\Update\" />
-    <Folder Include="Features\Brands\Profiles\" />
     <Folder Include="Features\Brands\Constants\" />
     <Folder Include="Features\Brands\Rules\" />
-    <Folder Include="Features\Brands\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Core.Application">
+      <HintPath>..\..\corePackages\Core.Packages\Core.Application\bin\Debug\net7.0\Core.Application.dll</HintPath>
+    </Reference>
     <Reference Include="Core.Persistance">
       <HintPath>..\..\corePackages\Core.Packages\Core.Persistance\bin\Debug\net7.0\Core.Persistance.dll</HintPath>
     </Reference>

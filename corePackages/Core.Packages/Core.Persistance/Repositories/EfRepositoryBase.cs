@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace Core.Persistance.Repositories;
 
-public class EfRepositoryBase<TEntity, TEntityId, TContext> : IAsyncRepository<TEntity, TEntityId>,IRepository<TEntity, TEntityId>
+public class EfRepositoryBase<TEntity, TEntityId, TContext> : IAsyncRepository<TEntity, TEntityId>, IRepository<TEntity, TEntityId>
     where TEntity : Entity<TEntityId>
     where TEntityId : unmanaged
     where TContext : DbContext
@@ -80,9 +80,13 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext> : IAsyncRepository<T
     }
 
     public async Task<Paginate<TEntity>> GetListAsync(Expression<Func<TEntity, bool>>? predicate = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, Func<IQueryable<TEntity>,
-            IIncludableQueryable<TEntity, object>>? include = null, int index = 0, int size = 10,
-            bool withDeleted = false, bool enableTracking = true, CancellationToken cancellationToken = default)
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, 
+            Func<IQueryable<TEntity>,IIncludableQueryable<TEntity, object>>? include = null,
+            int index = 0,
+            int size = 10,
+            bool withDeleted = false,
+            bool enableTracking = true,
+            CancellationToken cancellationToken = default)
     {
         IQueryable<TEntity> queryable = Query();
         if (!enableTracking)
@@ -95,6 +99,7 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext> : IAsyncRepository<T
             queryable = queryable.Where(predicate);
         if (orderBy != null)
             return await orderBy(queryable).ToPaginateAsync(index, size, cancellationToken);
+
         return await queryable.ToPaginateAsync(index, size, cancellationToken);
     }
 
@@ -114,7 +119,7 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext> : IAsyncRepository<T
         return await queryable.ToPaginateAsync(index, size, cancellationToken);
     }
 
-    public IQueryable<TEntity> Query()=> _context.Set<TEntity>();
+    public IQueryable<TEntity> Query() => _context.Set<TEntity>();
 
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
