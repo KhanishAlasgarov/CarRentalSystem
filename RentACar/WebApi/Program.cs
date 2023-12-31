@@ -10,11 +10,11 @@ builder.Services
     .AddApplicationServices()
     .AddPersistanceService(builder.Configuration);
 
-builder.Services.AddControllers().AddNewtonsoftJson(cfg =>
-{
-    cfg.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-    
-});
+builder.Services.AddControllers(); //.AddNewtonsoftJson(cfg =>
+//{
+//    cfg.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+
+//});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

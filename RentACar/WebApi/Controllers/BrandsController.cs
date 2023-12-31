@@ -4,6 +4,7 @@ using Application.Features.Brands.Commands.Update;
 using Application.Features.Brands.Queries.GetById;
 using Application.Features.Brands.Queries.GetList;
 using Core.Application.Responses;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -11,6 +12,8 @@ namespace WebApi.Controllers
 
     public class BrandsController : BaseController
     {
+        
+
         [HttpGet]
         public async Task<IActionResult> GetById([FromQuery] GetByIdBrandQuery request)
         {

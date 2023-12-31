@@ -13,10 +13,14 @@ public static class PersistanceServiceRegistration
     {
         services.AddDbContext<BaseDbContext>(opt =>
         {
-            opt.UseInMemoryDatabase("nArchitecture");
+            opt.UseSqlServer(configuration.GetConnectionString("Local"));
         });
 
         services.AddScoped<IBrandRepository, BrandRepository>();
+        services.AddScoped<IModelRepository, ModelRepository>();
+        services.AddScoped<ICarRepository, CarRepository>();
+        services.AddScoped<ITransmissionRepository, TransmissionRepository>();
+        services.AddScoped<IFuelRepository, FuelRepository>();
 
         return services;
     }
