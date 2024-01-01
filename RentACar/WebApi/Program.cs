@@ -1,7 +1,8 @@
 using Application;
+using Core.CrossCuttingConcerns.Exceptions.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Persistance; 
+using Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,12 +21,14 @@ builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
- 
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+if (!app.Environment.IsDevelopment())
+    app.ConfigureCustomExceptionMiddleware();
 
 app.UseHttpsRedirection();
 
