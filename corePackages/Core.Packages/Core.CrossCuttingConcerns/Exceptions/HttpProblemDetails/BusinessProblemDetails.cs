@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.CrossCuttingConcerns.Exceptions.Types;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.CrossCuttingConcerns.Exceptions.HttpProblemDetails;
@@ -12,4 +13,7 @@ public class BusinessProblemDetails : ProblemDetails
         Status = StatusCodes.Status400BadRequest;
         Type = "https://example.com/probs/business";
     }
+
+     
 }
+ 

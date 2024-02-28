@@ -31,7 +31,8 @@ public static class IQueryablePaginateExtensions
         return list;
     }
 
-    public static Paginate<T> ToPaginate<T>(this IQueryable<T> source, int index, int size, int from = 0)
+    public static Paginate<T> ToPaginate<T>
+        (this IQueryable<T> source, int index, int size, int from = 0)
     {
         if (from > index)
             throw new ArgumentException($"From: {from.ToString()} > Index: {index.ToString()}, must from <= Index");

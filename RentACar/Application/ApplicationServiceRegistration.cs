@@ -1,9 +1,9 @@
-﻿
-using Application.Features.Brands.Profiles;
-using Application.Features.Brands.Rules;
-using Core.Application.Rules;
+﻿using Core.Application.Rules;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Core.Application.Pipelines.Validation;
+using Core.Application.Pipelines.Transaction;
 
 namespace Application;
 
@@ -13,9 +13,12 @@ public static class ApplicationServiceRegistration
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddMediatR(con =>
         {
             con.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            con.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
+            con.AddOpenBehavior(typeof(TransactionScopeBehavior<,>));
         });
 
         return services;
@@ -31,7 +34,6 @@ public static class ApplicationServiceRegistration
         foreach (var item in types)
             if (addWithLifeCycle == null)
                 services.AddScoped(item);
-
             else
                 addWithLifeCycle(services, type);
         return services;

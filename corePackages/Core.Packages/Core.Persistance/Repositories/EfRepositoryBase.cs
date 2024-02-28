@@ -175,6 +175,7 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext> : IAsyncRepository<T
             .Metadata.GetNavigations()
             .Where(x => x is { IsOnDependent: false, ForeignKey.DeleteBehavior: DeleteBehavior.ClientCascade or DeleteBehavior.Cascade })
             .ToList();
+
         foreach (INavigation? navigation in navigations)
         {
             if (navigation.TargetEntityType.IsOwned())
