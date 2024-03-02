@@ -3,6 +3,7 @@ using Application.Features.Brands.Commands.Delete;
 using Application.Features.Brands.Commands.Update;
 using Application.Features.Brands.Queries.GetById;
 using Application.Features.Brands.Queries.GetList;
+using Core.Application.Requests;
 using Core.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace WebApi.Controllers
 
     public class BrandsController : BaseController
     {
-        
+
 
         [HttpGet]
         public async Task<IActionResult> GetById([FromQuery] GetByIdBrandQuery request)
@@ -21,9 +22,9 @@ namespace WebApi.Controllers
             return Ok(response);
         }
         [HttpGet]
-        public async Task<IActionResult> GetList([FromQuery] GetListBrandQuery request)
+        public async Task<IActionResult> GetList([FromQuery] PageRequest request)
         {
-            var response = await Mediator.Send(request);
+            var response = await Mediator.Send(new GetListBrandQuery { PageRequest = request });
             return Ok(response);
         }
 

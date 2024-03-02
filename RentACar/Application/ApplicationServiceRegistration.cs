@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Core.Application.Pipelines.Validation;
 using Core.Application.Pipelines.Transaction;
+using Core.Application.Pipelines.Caching;
 
 namespace Application;
 
@@ -19,6 +20,7 @@ public static class ApplicationServiceRegistration
             con.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
             con.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
             con.AddOpenBehavior(typeof(TransactionScopeBehavior<,>));
+            con.AddOpenBehavior(typeof(ChachingBehavior<,>));
         });
 
         return services;

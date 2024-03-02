@@ -1,12 +1,15 @@
 using Application;
 using Core.CrossCuttingConcerns.Exceptions.Extensions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//builder.Services.AddDistributedMemoryCache();
 
+builder.Services.AddStackExchangeRedisCache(opt =>
+{
+    opt.Configuration = "localhost:6379";
+});
 builder.Services
     .AddApplicationServices()
     .AddPersistanceService(builder.Configuration);
@@ -27,8 +30,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-//if (!app.Environment.IsDevelopment())
-app.ConfigureCustomExceptionMiddleware();
+if (!app.Environment.IsDevelopment())
+    app.ConfigureCustomExceptionMiddleware();
 
 app.UseHttpsRedirection();
 
