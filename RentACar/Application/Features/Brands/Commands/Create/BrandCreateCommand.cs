@@ -30,8 +30,8 @@ public class BrandCreateCommand : IRequest<CreatedBrandResponse>, ITransactional
 
             var brand = _mapper.Map<Brand>(request);
             brand.Id = Guid.NewGuid();
-            await _repository.AddAsync(brand);
-            return _mapper.Map<CreatedBrandResponse>(await _repository.AddAsync(brand));
+            var responseBrand =await _repository.AddAsync(brand);
+            return _mapper.Map<CreatedBrandResponse>(responseBrand);
         }
     }
 }
