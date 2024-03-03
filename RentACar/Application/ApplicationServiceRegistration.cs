@@ -7,7 +7,7 @@ using Core.Application.Pipelines.Transaction;
 using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Logging;
 using Core.CrossCuttingConcerns.Serilog;
-using Core.CrossCuttingConcerns.Serilog.Logger;
+using Core.CrossCuttingConcerns.Serilog.Loggers; 
 
 namespace Application;
 
@@ -27,7 +27,7 @@ public static class ApplicationServiceRegistration
             con.AddOpenBehavior(typeof(ChacheRemovingBehavior<,>));
             con.AddOpenBehavior(typeof(LoggingBehavior<,>));
         });
-        services.AddSingleton<LoggerServiceBase, FileLogger>();
+        services.AddSingleton<LoggerServiceBase, MsSqlLogger>();
         return services;
     }
     public static IServiceCollection AddSubClassesOfType(
