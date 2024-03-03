@@ -5,10 +5,11 @@ using Domain.Entities;
 using MediatR;
 using Core.Application.Pipelines.Transaction;
 using Core.Application.Pipelines.Caching;
+using Core.Application.Pipelines.Logging;
 
 namespace Application.Features.Brands.Commands.Create;
 
-public class BrandCreateCommand : IRequest<CreatedBrandResponse>, ITransactionalRequest, ICacheRemoverRequest
+public class BrandCreateCommand : IRequest<CreatedBrandResponse>, ITransactionalRequest, ICacheRemoverRequest,ILoggableRequest
 {
     public string Name { get; set; } = default!;
     public string? CacheGroupKey => "GetBrands";

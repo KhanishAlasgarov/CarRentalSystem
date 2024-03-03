@@ -4,12 +4,15 @@ using Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Services.AddDistributedMemoryCache();
+builder.Services.AddDistributedMemoryCache();
 
-builder.Services.AddStackExchangeRedisCache(opt =>
-{
-    opt.Configuration = "localhost:6379";
-});
+//builder.Services.AddStackExchangeRedisCache(opt =>
+//{
+//    opt.Configuration = "localhost:6379";
+//});
+
+builder.Services.AddHttpContextAccessor();
+
 builder.Services
     .AddApplicationServices()
     .AddPersistanceService(builder.Configuration);
@@ -30,7 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-if (!app.Environment.IsDevelopment())
+//if (!app.Environment.IsDevelopment())
     app.ConfigureCustomExceptionMiddleware();
 
 app.UseHttpsRedirection();
