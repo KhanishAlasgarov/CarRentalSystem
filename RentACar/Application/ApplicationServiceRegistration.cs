@@ -21,6 +21,7 @@ public static class ApplicationServiceRegistration
             con.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
             con.AddOpenBehavior(typeof(TransactionScopeBehavior<,>));
             con.AddOpenBehavior(typeof(ChachingBehavior<,>));
+            con.AddOpenBehavior(typeof(ChacheRemovingBehavior<,>));
         });
 
         return services;
